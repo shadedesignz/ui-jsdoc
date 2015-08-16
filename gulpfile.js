@@ -15,6 +15,7 @@ var config = {
     jsDocTpl:  'template',
     jsDocDest: 'demo/docs',
     jsDocSrc: ['demo/sample'],
+
     readme: __dirname + '/README.md',
     jsDocParams: ['-r', '-p'],
 };
@@ -95,4 +96,7 @@ gulp.task('watch', function() {
 });
 
 gulp.task('docs', ['js-doc']);
-gulp.task('default', ['watch', 'serve']);
+gulp.task('dev', ['watch', 'serve']);
+gulp.task('demo', function() {
+    runSequence('less', 'js-doc');
+});
