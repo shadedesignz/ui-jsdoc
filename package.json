@@ -1,30 +1,37 @@
 {
-  "name": "jaguarjs-jsdoc",
+  "name": "ui-jsdoc",
   "version": "0.0.1",
-  "description": "Jaguar.js template for JSDoc 3",
-  "main": "Gruntfile.js",
-  "dependencies": {
-  },
+  "description": "Bootstrap template for JSDoc 3",
+  "main": "gulpfile.js",
+  "dependencies": {},
   "devDependencies": {
-    "connect-livereload": "~0.3.2"
+    "connect-livereload": "^0.5.3",
+    "express": "^4.13.3",
+    "gulp": "^3.9.0",
+    "gulp-less": "^3.0.3",
+    "gulp-shell": "^0.4.2",
+    "jsdoc": "^3.3.2",
+    "opn": "^3.0.2",
+    "run-sequence": "^1.1.2",
+    "tiny-lr": "^0.1.6"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/davidshimjs/jaguarjs-jsdoc.git"
+    "url": "git://github.com/frzy/ui-jsdoc.git"
   },
   "keywords": [
     "jsdoc",
     "jsdoc3",
-    "jaguar.js",
+    "bootstrap",
     "template"
   ],
-  "author": "davidshimjs",
+  "author": "frzy",
   "license": "MIT",
   "readmeFilename": "README.md",
   "bugs": {
-    "url": "https://github.com/davidshimjs/jaguarjs-jsdoc/issues"
+    "url": "https://github.com/frzy/ui-jsdoc/issues"
   }
 }
