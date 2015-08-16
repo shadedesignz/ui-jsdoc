@@ -2,6 +2,10 @@
 	"tags": {
 		"allowUnknownTags" : true
 	},
+	"source": {
+        "includePattern": ".+\\.js(doc)?$",
+        "excludePattern": "(^|\\/|\\\\)_"
+    },
 	"plugins": ["plugins/markdown"],
 	"templates": {
 		"cleverLinks": true,
@@ -9,7 +13,7 @@
 		"default": {
 			"outputSourceFiles" : true
 		},
-		"applicationName": "Demo",
+		"applicationName": "test",
 		"disqus": "",
 		"googleAnalytics": "",
 		"openGraph": {
