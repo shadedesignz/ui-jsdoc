@@ -41,7 +41,7 @@ function jsDocCmd(opts) {
         dest = '-d ' + opts.jsDocDest,
         params = opts.jsDocParams.join(' ');
 
-    return [jsDoc, src, params, readme, conf, dest, tpl].join(' ');
+    return [jsDoc, src, params, readme, conf, dest, tpl].join(' ') + ' > dump.txt';
 }
 
 gulp.task('less', function () {
@@ -84,13 +84,15 @@ gulp.task('copy-js', function() {
 });
 
 gulp.task('watch', function() {
+    gulp.watch('demo/sample/*.js', ['js-doc']);
     gulp.watch('config/conf.json', ['js-doc']);
     gulp.watch('template/tmpl/*.tmpl', ['js-doc']);
-    gulp.watch('template/scripts/main.js', ['copy-js'])
+    gulp.watch('template/static/scripts/main.js', ['copy-js'])
     gulp.watch('template/less/*.less', function() {
         runSequence('less', 'copy-css');
     });
 
+    gulp.watch(config.jsDocDest + '/**/*.js', notifyLiveReload);
     gulp.watch(config.jsDocDest + '/**/*.html', notifyLiveReload);
     gulp.watch(config.jsDocDest + '/**/*.css', notifyLiveReload);
 });

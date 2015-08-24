@@ -1,0 +1,40 @@
+<?js
+var item = obj;
+var self = this;
+var icon = '<i class="fa fa-gift fa-lg"></i>';
+var arrow = '<span class="arrow"></span>';
+var getClass = function(node) {
+    if (node.inherited) {
+        return' class="inherit"';
+    } else if (node.overrides) {
+        return ' class="override"';
+    }
+
+    return '';
+}
+?>
+<li id="nav-<?js= item.longname.replace('.', '') ?>-item" data-toggle="collapse" data-target="#nav-<?js= item.longname.replace('.', '') ?>" class="collapsed">
+    <?js= self.linkto(item.longname, icon + item.longname + arrow) ?>
+</li>
+<ul class="sub-menu collapse" id="nav-<?js= item.longname.replace('.', '') ?>">
+    <?js if (item.members.length) { ?>
+        <div class="section-header">Options<span class="badge pull-right"><?js= item.members.length ?></span></div>
+        <?js item.members.forEach(function(member) { ?>
+            <?js= self.linkto(member.longname, '<li' + getClass(member) + '>' + member.name + '</li>') ?>
+        <?js }) ?>
+    <?js } ?>
+
+    <?js if (item.events.length) { ?>
+        <div class="section-header">Events<span class="badge pull-right"><?js= item.events.length ?></span></div>
+        <?js item.events.forEach(function(event) { ?>
+            <?js= self.linkto(event.longname, '<li' + getClass(event) + '>' + event.name + '</li>') ?>
+        <?js }) ?>
+    <?js } ?>
+
+    <?js if (item.methods.length) { ?>
+        <div class="section-header">Methods<span class="badge pull-right"><?js= item.methods.length ?></span></div>
+        <?js item.methods.forEach(function(method) { ?>
+            <?js= self.linkto(method.longname, '<li' + getClass(method) + '>' + method.name + '</li>') ?>
+        <?js }) ?>
+    <?js } ?>
+</ul>
