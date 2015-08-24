@@ -1,4 +1,4 @@
-Jaguar.js template for JSDoc 3
+UI template for JSDoc 3
 ---
 - [Jaguar.js](http://http://frzy.github.io/ui-jsdoc)
 - [Jaguar.js Documentations](http://frzy.github.io/ui-jsdoc/demo/docs)
