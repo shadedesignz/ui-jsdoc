@@ -1,57 +1,99 @@
 $(function () {
-    // Search Items
-    $('#search').on('keyup', function (e) {
-        var value = $(this).val();
-        var $el = $('.navigation');
+    var sideBarMenu = $('#side-bar-menu'),
+        sideBar = $('.nav-side-menu'),
+        searchTerms = $('#menu-content > li').map(function() {
+            var $this = $(this),
+                target = $this.data('target'),
+                $child = target && $this.siblings($this.data('target')) || [];
 
-        if (value) {
-            var regexp = new RegExp(value, 'i');
-            $el.find('li, .itemMembers').hide();
+            return [{
+                id: $(this).attr('id'),
+                text: $(this).find('a').text().toLowerCase(),
+                parent: null
+            }].;
+        }).toArray(),
+        showAllNav = function() {
+            $('#search').data('previousVal', '');
+            searchTerms.forEach(function(item) {
+                item.$.show();
 
-            $el.find('li').each(function (i, v) {
-                var $item = $(v);
+                $(item.$.data('target')).collapse('hide');
 
-                if ($item.data('name') && regexp.test($item.data('name'))) {
-                    $item.show();
-                    $item.closest('.itemMembers').show();
-                    $item.closest('.item').show();
-                }
+                item.children.forEach(function(child) {
+                    child.$.show();
+                });
+
             });
-        } else {
-            $el.find('.item, .itemMembers').show();
-        }
+        },
+        sideMenuClone, searchTimeOut;
 
-        $el.find('.list').scrollTop(0);
+    $('.nav-side-menu .menu-content > li a').click(function(e) {
+        e.stopPropagation();
     });
 
-    // Toggle when click an item element
-    $('.navigation').on('click', '.title', function (e) {
-        $(this).parent().find('.itemMembers').toggle();
+    $('.nav-side-menu .clearer').click(function(e) {
+        $('#search').val('');
+        $(this).hide();
+        showAllNav();
     });
 
-    // Show an item related a current documentation automatically
-    var filename = $('.page-title').data('filename').replace(/\.[a-z]+$/, '');
-    var $currentItem = $('.navigation .item[data-name*="' + filename + '"]:eq(0)');
+    // $('#search').keyup(function(e) {
+    //     var $this = $(this),
+    //         preVal = $this.data('previousVal'),
+    //         val = $this.val().toLowerCase(),
+    //         tempMatch = [],
+    //         tempHide = [];
 
-    if ($currentItem.length) {
-        $currentItem
-            .remove()
-            .prependTo('.navigation .list')
-            .show()
-            .find('.itemMembers')
-                .show();
-    }
+    //     clearTimeout(searchTimeOut);
 
-    // Auto resizing on navigation
-    var _onResize = function () {
-        var height = $(window).height();
-        var $el = $('.navigation');
+    //     if (val.length && preVal !== val) {
+    //         searchTimeOut = setTimeout(function() {
+    //             $this.data('previousVal', val);
+    //             $this.next().show();
 
-        $el.height(height).find('.list').height(height - 133);
-    };
+    //             sideMenuClone = sideBarMenu.clone(true, true);
+    //             sideBarMenu.remove();
+    //             sideBar.append(sideMenuClone);
 
-    $(window).on('resize', _onResize);
-    _onResize();
+    //             searchTerms.forEach(function(item) {
+    //                 var pScore = item.text.score(val, 0.5),
+    //                     mChild = [],
+    //                     hChild = [];
+
+    //                 item.children.forEach(function(child) {
+    //                     var cScore = child.text.score(val, 0.5);
+
+    //                     if (cScore > 0.5) {
+    //                         mChild[mChild.length] = child.$;
+    //                     } else {
+    //                         hChild[hChild.length] = child.$;
+    //                     }
+    //                 });
+
+    //                 if (pScore > 0.5 || mChild.length) {
+    //                     item.$.show();
+
+    //                     if (mChild.length) {
+    //                         mChild.forEach(function(child) {
+    //                             child.show();
+    //                         });
+    //                         hChild.forEach(function(child) {
+    //                             child.hide();
+    //                         });
+
+    //                         $(item.$.data('target')).collapse('show');
+    //                     } else {
+    //                         $(item.$.data('target')).collapse('hide');
+    //                     }
+    //                 } else {
+    //                     item.$.hide();
+    //                 }
+    //             });
+    //         }, 150);
+    //     } else if (!val.length) {
+    //         $this.next().hide();
+    //     }
+    // });
 
     // disqus code
     if (config.disqus) {
