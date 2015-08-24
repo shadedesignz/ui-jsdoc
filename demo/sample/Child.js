@@ -1,6 +1,9 @@
 /**
  * Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam
+ * tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam
+ *
+ * @summary Short summary
+ *
  * @class
  * @extends Parent
  */
@@ -10,6 +13,8 @@ var Child = function () {
 Child.prototype = /** @lends Child.prototype */{
     /**
      * cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidata
+     *
+     * @summary test summary
      * @property {Boolean}
      */
     testPropertyInChild: '',
