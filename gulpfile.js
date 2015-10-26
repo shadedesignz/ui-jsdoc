@@ -14,7 +14,7 @@ var config = {
     jsDocConf: __dirname + '/config/conf.json',
     jsDocTpl:  'template',
     jsDocDest: 'demo/docs',
-    jsDocSrc: ['demo/sample'],
+    jsDocSrc: ['demo/sample/test'],
 
     readme: __dirname + '/README.md',
     jsDocParams: ['-r', '-p'],
@@ -85,6 +85,7 @@ gulp.task('copy-js', function() {
 
 gulp.task('watch', function() {
     gulp.watch('demo/sample/*.js', ['js-doc']);
+    gulp.watch('template/publish.js', ['js-doc']);
     gulp.watch('config/conf.json', ['js-doc']);
     gulp.watch('template/tmpl/*.tmpl', ['js-doc']);
     gulp.watch('template/static/scripts/main.js', ['copy-js'])

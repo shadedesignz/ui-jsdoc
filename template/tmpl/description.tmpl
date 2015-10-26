@@ -1,0 +1,30 @@
+<?js
+var data = obj;
+?>
+
+<?js if (data.deprecated === true) { ?>
+    <div class="deprecated label-danger text-center" role="alert">
+        <strong>Deprecated</strong>
+    </div>
+<?js } else if (data.deprecated) { ?>
+    <div class="deprecated label-danger text-center" role="alert">
+        <strong>Deprecated</strong>: <?js= data.deprecated ?>
+    </div>
+<?js } ?>
+
+<?js if (data.summary && data.description) { ?>
+    <p>
+        <span><?js= data.summary ?></span>
+        <span class="desc-expand collapsed" data-toggle="collapse" data-target="#<?js= data.___id ?>">
+            <i class="fa fa-ellipsis-h"></i>
+        </span>
+    </p>
+
+    <div class="collapse" id="<?js= data.___id ?>">
+        <?js= data.description ?>
+    </div>
+<?js } else if (data.summary) { ?>
+    <p><?js= data.summary ?></p>
+<?js } else if (data.description) { ?>
+    <?js= data.description ?>
+<?js } ?>

@@ -14,13 +14,27 @@ var getClass = function(node) {
 }
 ?>
 <li id="nav-<?js= item.longname.replace('.', '') ?>-item" data-toggle="collapse" data-target="#nav-<?js= item.longname.replace('.', '') ?>" class="collapsed">
-    <?js= self.linkto(item.longname, icon + item.longname + arrow) ?>
+    <?js= self.linkto(item.longname, icon + item.name + arrow) ?>
 </li>
 <ul class="sub-menu collapse" id="nav-<?js= item.longname.replace('.', '') ?>">
+    <?js if (item.constants.length) { ?>
+        <div class="section-header">Constants<span class="badge pull-right"><?js= item.constants.length ?></span></div>
+        <?js item.constants.forEach(function(constant) { ?>
+            <?js= self.linkto(constant.longname, '<li' + getClass(constant) + '>' + constant.name + '</li>') ?>
+        <?js }) ?>
+    <?js } ?>
+
     <?js if (item.members.length) { ?>
-        <div class="section-header">Options<span class="badge pull-right"><?js= item.members.length ?></span></div>
+        <div class="section-header">Members<span class="badge pull-right"><?js= item.members.length ?></span></div>
         <?js item.members.forEach(function(member) { ?>
             <?js= self.linkto(member.longname, '<li' + getClass(member) + '>' + member.name + '</li>') ?>
+        <?js }) ?>
+    <?js } ?>
+
+    <?js if (item.options.length) { ?>
+        <div class="section-header">Options<span class="badge pull-right"><?js= item.options.length ?></span></div>
+        <?js item.options.forEach(function(opt) { ?>
+            <?js= self.linkto(opt.longname, '<li' + getClass(opt) + '>' + opt.name + '</li>') ?>
         <?js }) ?>
     <?js } ?>
 
@@ -34,6 +48,13 @@ var getClass = function(node) {
     <?js if (item.methods.length) { ?>
         <div class="section-header">Methods<span class="badge pull-right"><?js= item.methods.length ?></span></div>
         <?js item.methods.forEach(function(method) { ?>
+            <?js= self.linkto(method.longname, '<li' + getClass(method) + '>' + method.name + '</li>') ?>
+        <?js }) ?>
+    <?js } ?>
+
+    <?js if (item.privateMethods.length) { ?>
+        <div class="section-header">Private Methods<span class="badge pull-right"><?js= item.privateMethods.length ?></span></div>
+        <?js item.privateMethods.forEach(function(method) { ?>
             <?js= self.linkto(method.longname, '<li' + getClass(method) + '>' + method.name + '</li>') ?>
         <?js }) ?>
     <?js } ?>

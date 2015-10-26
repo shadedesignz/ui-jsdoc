@@ -8,9 +8,14 @@
  * @extends Parent
  */
 var Child = function () {
+    /**
+     * Property test
+     * @type {String}
+     */
+    this.test = 'test'
 };
 
-Child.prototype = /** @lends Child.prototype */{
+Child.prototype = /** @lends Child */{
     /**
      * cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidata
      *

@@ -3,32 +3,88 @@ var data = obj;
 var self = this;
 var typeSignature = '';
 
+// if (data.name === 'CURRENT_LABEL_OFFEST' && data.memberof === 'SimpleRenderer') {
+    // console.log(data);
+// }
+
 if (data.type && data.type.names) {
     data.type.names.forEach(function (name) {
         typeSignature += '<span class="type-signature type ' + name.toLowerCase() + '">' + self.linkto(name, self.htmlsafe(name)) + '</span> ';
     });
 }
 ?>
-<div class="panel panel-default">
-    <div class="panel-heading" id="<?js= id ?>"><?js= data.attribs + (data.scope === 'static' ? longname : name)  + typeSignature ?></div>
-    <div class="panel-body">
-        <?js if (data.summary) { ?>
-            <div class="well well-sm summary">
-                <?js= summary ?>
-            </div>
-        <?js } ?>
+<div class="doc-member panel panel-default">
+    <div class="panel-heading" id="<?js= id ?>">
+        <?js= (data.scope === 'static' ? longname : name) + data.attribs ?>
+        <div class="row sub-heading">
+            <?js if (data.author && author.length) { ?>
+                <div class="col-sm-4">Author:
+                <?js var authors = data.author.map(function(a) {
+                        return self.resolveAuthorLinks(a);
+                    }).join(', '); ?>
+                <?js= authors ?>
+                </div>
+            <?js } else { ?>
+                <div class="col-sm-4"></div>
+            <?js } ?>
 
-        <?js if (data.description) { ?>
-            <div class="well well-sm">
-                <?js= data.description ?>
-            </div>
-        <?js } ?>
+            <?js if (data.version) { ?>
+                <div class="col-sm-4 text-center">Version: <?js=  data.version ?></div>
+            <?js } else { ?>
+                <div class="col-sm-4"></div>
+            <?js } ?>
 
+
+            <?js if (data.meta) {?>
+                <div class="col-sm-4 text-right">
+                    <?js= self.linkto(meta.filename) ?>, <?js= self.linkto(meta.filename, 'line ' + meta.lineno, null, 'line' + meta.lineno) ?>
+                </div>
+            <?js } else { ?>
+                <div class="col-sm-4"></div>
+            <?js } ?>
+        </div>
+    </div>
+    <div class="markdown-body panel-body">
+        <?js= this.partial('description.tmpl', data) ?>
+        <?js= this.partial('types.tmpl', data.type) ?>
         <?js= this.partial('details.tmpl', data) ?>
 
         <?js if (data.examples && examples.length) { ?>
-            <h5>Example<?js= examples.length > 1? 's':'' ?></h5>
             <?js= this.partial('examples.tmpl', examples) ?>
         <?js } ?>
     </div>
+<?js if (data.copyright || data.license || data.since) { ?>
+    <div class="panel-footer">
+        <div class="row">
+            <?js if (data.copyright) { ?>
+                <div class="col-sm-4">
+                    <span data-toggle="popover"
+                          title="Copyright"
+                          data-placement="right"
+                          data-content="<?js= data.copyright ?>"
+                          data-trigger="hover"
+                    >
+                    Copyright
+                    </span>
+                </div>
+            <?js } else { ?>
+                <div class="col-sm-4"></div>
+            <?js } ?>
+
+            <?js if (data.license) { ?>
+                <div class="col-sm-4 text-center">
+                    <a href="<?js=  data.license ?>">License</a>
+                </div>
+            <?js } else { ?>
+                <div class="col-sm-4"></div>
+            <?js } ?>
+
+            <?js if (data.since) { ?>
+                <div class="col-sm-4 text-right">Since: <?js=  data.since ?></div>
+            <?js } else { ?>
+                <div class="col-sm-4"></div>
+            <?js } ?>
+        </div>
+    </div>
+<?js } ?>
 </div>

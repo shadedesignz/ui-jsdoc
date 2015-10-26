@@ -3,16 +3,11 @@ body {
   font: 1em "jaf-bernino-sans", "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Geneva, Verdana, sans-serif;
   background-color: #fff;
 }
-ul,
-ol {
-  margin: 0;
-  padding: 0;
-}
-li {
-  list-style-type: none;
-}
 #wrap {
   position: relative;
+}
+blockquote {
+  font-size: inherit;
 }
 .nav-side-menu {
   font-family: verdana;
@@ -21,7 +16,7 @@ li {
   background-color: #2e353d;
   position: fixed;
   top: 0px;
-  width: 300px;
+  width: 250px;
   height: 100%;
   color: #e1ffff;
 }
@@ -223,6 +218,59 @@ li {
 }
 @media (min-width: 767px) {
   .main {
-    margin-left: 300px;
+    margin-left: 250px;
   }
+}
+.doc-member {
+  font-size: 0.8em;
+}
+.doc-member .panel-heading {
+  font-size: 1.2em;
+  padding-bottom: 5px;
+}
+.doc-member .panel-heading .badge {
+  margin: 5px 1px;
+  font-size: 0.7em;
+  background-color: #5C6C86;
+}
+.doc-member .panel-heading .sub-heading {
+  font-size: 0.75em;
+  padding-top: 3px;
+}
+@media only screen and (max-width: 767px) {
+  .doc-member .panel-heading .sub-heading div {
+    text-align: left;
+  }
+}
+.doc-member .deprecated {
+  margin-bottom: 10px;
+  border-radius: .25em;
+}
+.doc-member .desc-expand {
+  display: inline-block;
+  height: 1.5em;
+  border-radius: 0;
+  background-color: white;
+  padding: 0 5px;
+  cursor: pointer;
+  box-sizing: border-box;
+  border: 1px solid transparent;
+}
+.doc-member .desc-expand i {
+  vertical-align: text-bottom;
+}
+.doc-member .desc-expand:hover,
+.doc-member .desc-expand:not(.collapsed) {
+  border: 1px solid black;
+  background-color: #E4F1F7;
+}
+.detail-content {
+  margin: 10px 0;
+}
+.tag-todo .todo-item {
+  margin: 0 1.5em;
+}
+.tag-todo .todo-item label {
+  cursor: text;
+  font-weight: normal;
 }

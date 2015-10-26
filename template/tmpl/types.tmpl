@@ -1,0 +1,16 @@
+<?js
+var data = obj;
+var self = this;
+var types = data ? data.names || [] : [];
+if (types.length) { ?>
+<div class="detail-content">
+    <?js
+    var t = types.map(function(t) {
+        return "<code>" + self.linkto(t, self.htmlsafe(t)) + "</code>"
+    }).join(' or '); ?>
+
+    <span class="detail-header"><strong>Type:</strong></span>
+    <?js= t ?>
+</div>
+<?js } ?>
+
