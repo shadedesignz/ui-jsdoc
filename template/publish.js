@@ -88,14 +88,9 @@ function addAttribs(f) {
 
     if (attribs.length) {
         f.attribs = attribs.map(function(attr) {
-            return '<span class="' + attr + ' badge pull-right">' +
-                htmlsafe(attr) + '</span>'
+            return '<span class="' + attr + ' badge">' +
+                htmlsafe(attr) + '</span>';
         }).join('');
-
-        // '<span class="type-signature' +
-        //     (attribs[0] === 'static' ? ' static' : '') +
-        //     '">' + htmlsafe(attribs.length ? attribs.join(',') : '') +
-        //     '</span>';
     }
 }
 
@@ -250,13 +245,15 @@ function buildNav(members) {
                     kind: 'constant',
                     memberof: v.longname
                 }),
+                privateMembers: find({
+                    kind: 'member',
+                    memberof: v.longname,
+                    access: {is: 'private'}
+                }),
                 members: find({
                     kind: 'member',
-                    memberof: v.longname
-                }),
-                options: find({
-                    kind: 'member',
-                    memberof: v.longname + '.options'
+                    memberof: v.longname,
+                    access: {'!is': 'private'}
                 }),
                 methods: find({
                     kind: 'function',
@@ -274,13 +271,16 @@ function buildNav(members) {
                 }),
                 events: find({
                     kind: 'event',
-                    memberof: [v.longname, v.longname + '.options']
+                    memberof: v.longname,
+                    access: {'!is': 'private'}
+                }),
+                privateEvents: find({
+                    kind: 'event',
+                    memberof: v.longname,
+                    access: {is: 'private'}
                 })
             };
 
-            if (v.name === 'SimpleRenderer') {
-                console.log(data().stringify());
-            }
             nav.push(obj);
         });
     }

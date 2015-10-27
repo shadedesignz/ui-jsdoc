@@ -3,10 +3,6 @@ var data = obj;
 var self = this;
 var typeSignature = '';
 
-// if (data.name === 'CURRENT_LABEL_OFFEST' && data.memberof === 'SimpleRenderer') {
-    // console.log(data);
-// }
-
 if (data.type && data.type.names) {
     data.type.names.forEach(function (name) {
         typeSignature += '<span class="type-signature type ' + name.toLowerCase() + '">' + self.linkto(name, self.htmlsafe(name)) + '</span> ';
@@ -15,10 +11,23 @@ if (data.type && data.type.names) {
 ?>
 <div class="doc-member panel panel-default">
     <div class="panel-heading" id="<?js= id ?>">
-        <?js= (data.scope === 'static' ? longname : name) + data.attribs ?>
+        <div class="row">
+            <div class="col-sm-8">
+                <?js= (data.scope === 'static' ? longname : name) ?>
+            </div>
+            <?js if (data.attribs) { ?>
+                <div class="col-sm-4">
+                    <?js= data.attribs ?>
+                </div>
+                <?js } else if (data.meta) { ?>
+                    <div class="col-sm-4 text-right small heading-meta">
+                        <?js= self.linkto(meta.filename) ?>, <?js= self.linkto(meta.filename, 'line ' + meta.lineno, null, 'line' + meta.lineno) ?>
+                    </div>
+                <?js } ?>
+        </div>
         <div class="row sub-heading">
             <?js if (data.author && author.length) { ?>
-                <div class="col-sm-4">Author:
+                <div class="col-sm-4 small">Author:
                 <?js var authors = data.author.map(function(a) {
                         return self.resolveAuthorLinks(a);
                     }).join(', '); ?>
@@ -29,14 +38,13 @@ if (data.type && data.type.names) {
             <?js } ?>
 
             <?js if (data.version) { ?>
-                <div class="col-sm-4 text-center">Version: <?js=  data.version ?></div>
+                <div class="col-sm-4 text-center small">Version: <?js=  data.version ?></div>
             <?js } else { ?>
                 <div class="col-sm-4"></div>
             <?js } ?>
 
-
-            <?js if (data.meta) {?>
-                <div class="col-sm-4 text-right">
+            <?js if (data.meta && data.attribs) {?>
+                <div class="col-sm-4 text-right small">
                     <?js= self.linkto(meta.filename) ?>, <?js= self.linkto(meta.filename, 'line ' + meta.lineno, null, 'line' + meta.lineno) ?>
                 </div>
             <?js } else { ?>

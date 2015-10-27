@@ -16,11 +16,11 @@ blockquote {
   background-color: #2e353d;
   position: fixed;
   top: 0px;
-  width: 250px;
+  width: 350px;
   height: 100%;
   color: #e1ffff;
 }
-@media only screen and (max-width: 767px) {
+@media only screen and (max-width: 1000px) {
   .nav-side-menu {
     position: relative;
     width: 100%;
@@ -38,7 +38,7 @@ blockquote {
   text-align: center;
   font-size: 2.5em;
 }
-@media only screen and (max-width: 767px) {
+@media only screen and (max-width: 1000px) {
   .nav-side-menu .brand {
     text-align: left !important;
     font-size: 22px;
@@ -49,7 +49,7 @@ blockquote {
 .nav-side-menu .toggle-btn {
   display: none;
 }
-@media only screen and (max-width: 767px) {
+@media only screen and (max-width: 1000px) {
   .nav-side-menu .toggle-btn {
     display: block;
     cursor: pointer;
@@ -203,7 +203,7 @@ blockquote {
   width: 20px;
   padding-right: 25px;
 }
-@media (min-width: 767px) {
+@media (min-width: 1000px) {
   .nav-side-menu .menu-list .menu-content {
     display: block;
   }
@@ -211,14 +211,14 @@ blockquote {
 .main {
   padding: 20px 20px;
 }
-@media (max-width: 767px) {
+@media (max-width: 1000px) {
   .main {
     margin-left: 0;
   }
 }
-@media (min-width: 767px) {
+@media (min-width: 1000px) {
   .main {
-    margin-left: 250px;
+    margin-left: 350px;
   }
 }
 .doc-member {
@@ -232,9 +232,19 @@ blockquote {
   margin: 5px 1px;
   font-size: 0.7em;
   background-color: #5C6C86;
+  float: right;
+}
+@media only screen and (max-width: 767px) {
+  .doc-member .panel-heading .badge {
+    float: left;
+  }
+}
+@media only screen and (max-width: 767px) {
+  .doc-member .panel-heading .heading-meta {
+    text-align: left;
+  }
 }
 .doc-member .panel-heading .sub-heading {
-  font-size: 0.75em;
   padding-top: 3px;
 }
 @media only screen and (max-width: 767px) {

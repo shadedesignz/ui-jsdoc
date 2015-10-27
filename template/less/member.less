@@ -10,10 +10,20 @@
             margin: 5px 1px;
             font-size: 0.7em;
             background-color: #5C6C86;
+            float: right;
+
+            @media only screen and (max-width : 767px) {
+                float: left;
+            }
+        }
+
+        .heading-meta {
+            @media only screen and (max-width : 767px) {
+                text-align: left;
+            }
         }
 
         .sub-heading {
-            font-size: 0.75em;
             padding-top: 3px;
 
             div {

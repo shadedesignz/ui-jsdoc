@@ -94,9 +94,7 @@
         <?js }); ?></dl>
     <?js } ?>
 
-
-
-
+    <!-- CONSTANTS -->
     <?js
         var constants = self.findOrder({
             kind: 'constant',
@@ -113,13 +111,13 @@
         <?js }); ?></dl>
     <?js } ?>
 
-
-
+    <!-- MEMBERS -->
     <?js
         var members = self.findOrder({
             kind: 'member',
-            memberof: title === 'Global' ? {isUndefined: true} : doc.longname
-        }, 'access, name');
+            memberof: title === 'Global' ? {isUndefined: true} : doc.longname,
+            access: {'!is': 'private'}
+        }, 'name');
 
         if (members && members.length && members.forEach) {
     ?>
@@ -132,42 +130,26 @@
         <?js }); ?></dl>
     <?js } ?>
 
-
+    <!-- PRIVATE MEMBERS -->
     <?js
-        var opts = self.findOrder({
+        var pMembers = self.findOrder({
             kind: 'member',
-            memberof: title === 'Global' ? {isUndefined: true} : doc.longname + '.options'
+            memberof: title === 'Global' ? {isUndefined: true} : doc.longname,
+            access: {is: 'private'}
         }, 'name');
 
-        if (opts && opts.length && opts.forEach) {
+        if (pMembers && pMembers.length && pMembers.forEach) {
     ?>
         <div class="page-header">
-            <h3>Options</h3>
+            <h3>Private Members</h3>
         </div>
 
-        <dl><?js opts.forEach(function(o) { ?>
-            <?js= self.partial('members.tmpl', o) ?>
+        <dl><?js pMembers.forEach(function(p) { ?>
+            <?js= self.partial('members.tmpl', p) ?>
         <?js }); ?></dl>
     <?js } ?>
 
-
-    <?js
-        var events = self.findOrder({
-            kind: 'event',
-            memberof: title === 'Global' ? {isUndefined: true} : [doc.longname, doc.longname + '.options']
-        }, 'access, name');
-        if (events && events.length && events.forEach) {
-    ?>
-        <div class="page-header">
-            <h3>Events</h3>
-        </div>
-
-        <dl><?js events.forEach(function(e) { ?>
-            <?js= self.partial('method.tmpl', e) ?>
-        <?js }); ?></dl>
-    <?js } ?>
-
-
+    <!-- METHODS -->
     <?js
         var methods = self.find({
             kind: 'function',
@@ -185,6 +167,7 @@
         <?js }); ?></dl>
     <?js } ?>
 
+    <!-- PRIVATE METHODS -->
     <?js
         var pMethods = self.find({
             kind: 'function',
@@ -202,8 +185,49 @@
         <?js }); ?></dl>
     <?js } ?>
 
+    <!-- EVENTS -->
     <?js
-        var typedefs = self.find({kind: 'typedef', memberof: title === 'Global' ? {isUndefined: true} : doc.longname});
+        var events = self.findOrder({
+            kind: 'event',
+            memberof: title === 'Global' ? {isUndefined: true} : doc.longname,
+            access: {'!is': 'private'}
+        }, 'name');
+        if (events && events.length && events.forEach) {
+    ?>
+        <div class="page-header">
+            <h3>Events</h3>
+        </div>
+
+        <dl><?js events.forEach(function(e) { ?>
+            <?js= self.partial('method.tmpl', e) ?>
+        <?js }); ?></dl>
+    <?js } ?>
+
+    <!-- PRIVATE EVENTS -->
+    <?js
+        var pEvents = self.findOrder({
+            kind: 'event',
+            memberof: title === 'Global' ? {isUndefined: true} : doc.longname,
+            access: {is: 'private'}
+        }, 'name');
+        if (pEvents && pEvents.length && pEvents.forEach) {
+    ?>
+        <div class="page-header">
+            <h3>Private Events</h3>
+        </div>
+
+        <dl><?js pEvents.forEach(function(e) { ?>
+            <?js= self.partial('method.tmpl', e) ?>
+        <?js }); ?></dl>
+    <?js } ?>
+
+    <!-- TYPE DEFS -->
+    <?js
+        var typedefs = self.findOrder({
+            kind: 'typedef',
+            memberof: title === 'Global' ? {isUndefined: true} : doc.longname
+        }, 'name');
+
         if (typedefs && typedefs.length && typedefs.forEach) {
     ?>
         <div class="page-header">
