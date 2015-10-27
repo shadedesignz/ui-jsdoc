@@ -14,7 +14,7 @@ var config = {
     jsDocConf: __dirname + '/config/conf.json',
     jsDocTpl:  'template',
     jsDocDest: 'demo/docs',
-    jsDocSrc: ['demo/sample/test'],
+    jsDocSrc: ['demo/sample'],
 
     readme: __dirname + '/README.md',
     jsDocParams: ['-r', '-p'],
@@ -41,7 +41,7 @@ function jsDocCmd(opts) {
         dest = '-d ' + opts.jsDocDest,
         params = opts.jsDocParams.join(' ');
 
-    return [jsDoc, src, params, readme, conf, dest, tpl].join(' ') + ' > dump.txt';
+    return [jsDoc, src, params, readme, conf, dest, tpl].join(' ') + ' > dump.json';
 }
 
 gulp.task('less', function () {
