@@ -4,6 +4,33 @@
 @colorLink: #2a6496;
 @colorBgNavi: #1a1a1a;
 
+.before() {
+    font-family: FontAwesome;
+    display: inline-block;
+    padding-left: 10px;
+    padding-right: 10px;
+    vertical-align: middle;
+}
+
+.before-left() {
+    .before();
+    float: left;
+}
+.before-right() {
+    .before();
+    float: right;
+}
+
+.before-right-chevron() {
+    .before-right();
+    content: "\f078";
+}
+
+.before-left-square() {
+    .before-left;
+    content: "\f0c8";
+}
+
 .font-description () {
     font-family: "freight-text-pro",Georgia,Cambria,"Times New Roman",Times,serif
 }

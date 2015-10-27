@@ -6,6 +6,19 @@
         font-size: 1.2em;
         padding-bottom: 5px;
 
+        .panel-title {
+            &.inherit:before {
+                .before-left-square;
+                color: lime;
+                padding: 1px 5px 0 0;
+            }
+            &.override:before {
+                .before-left-square;
+                color: red;
+                padding: 1px 5px 0 0;
+            }
+        }
+
         .badge {
             margin: 5px 1px;
             font-size: 0.7em;

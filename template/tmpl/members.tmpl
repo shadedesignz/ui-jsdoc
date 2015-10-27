@@ -2,6 +2,15 @@
 var data = obj;
 var self = this;
 var typeSignature = '';
+var getClass = function(node) {
+    if (node.inherited) {
+        return ' inherit';
+    } else if (node.overrides) {
+        return ' override';
+    }
+
+    return '';
+};
 
 if (data.type && data.type.names) {
     data.type.names.forEach(function (name) {
@@ -12,7 +21,7 @@ if (data.type && data.type.names) {
 <div class="doc-member panel panel-default">
     <div class="panel-heading" id="<?js= id ?>">
         <div class="row">
-            <div class="col-sm-8">
+            <div class="panel-title col-sm-8<?js= getClass(data) ?>">
                 <?js= (data.scope === 'static' ? longname : name) ?>
             </div>
             <?js if (data.attribs) { ?>
