@@ -64,7 +64,7 @@ function needsSignature(doclet) {
 function addSignatureParams(f) {
     var params = helper.getSignatureParams(f, 'optional');
 
-    f.signature = (f.signature || '') + '('+params.join(', ')+')';
+    f.signature = (f.signature || '') + '(' + params.join(', ') + ')';
 }
 
 function addSignatureReturns(f) {

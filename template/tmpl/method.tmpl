@@ -2,7 +2,9 @@
 var data = obj;
 var self = this;
 
-// console.log(data);
+if (data.memberof === 'SimpleRenderer' && data.name === 'get') {
+    console.log(data);
+}
 ?>
 
 
@@ -10,7 +12,7 @@ var self = this;
     <div class="panel-heading" id="<?js= id ?>">
         <div class="row">
             <div class="col-sm-8">
-                <?js= (data.scope === 'static' ? longname : name) ?>
+                <?js= (data.scope === 'static' ? longname : name) + (kind !== 'event' ? data.signature : '') ?>
             </div>
             <?js if (data.attribs) { ?>
                 <div class="col-sm-4">
@@ -53,5 +55,23 @@ var self = this;
         <?js= this.partial('description.tmpl', data) ?>
         <?js= this.partial('types.tmpl', data.type) ?>
         <?js= this.partial('details.tmpl', data) ?>
+
+        <?js if (data['this']) { ?>
+            <b>Scope:</b> <?js= this.linkto(data['this'], data['this']) ?>
+        <?js } ?>
+
+        <?js if (data.params && params.length) { ?>
+            <h5><b>Parameters</b>:</h5>
+            <?js= this.partial('params.tmpl', params) ?>
+        <?js } ?>
+
+        <?js if (data.returns && returns.length) { ?>
+            <h5><b>Returns</b>:</h5>
+            <?js= self.partial('returns.tmpl', data.returns) ?>
+        <?js } ?>
+
+        <?js if (data.examples && examples.length) { ?>
+            <?js= this.partial('examples.tmpl', examples) ?>
+        <?js } ?>
     </div>
 </div>

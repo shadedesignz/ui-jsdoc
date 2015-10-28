@@ -9,6 +9,13 @@ body {
 blockquote {
   font-size: inherit;
 }
+table {
+  width: 100%;
+}
+table tr th,
+table tr td {
+  padding: 0 10px;
+}
 .nav-side-menu {
   font-family: verdana;
   font-size: 12px;
@@ -227,6 +234,28 @@ blockquote {
 .doc-member .panel-heading {
   font-size: 1.2em;
   padding-bottom: 5px;
+}
+.doc-member .panel-heading .panel-title.inherit:before {
+  font-family: FontAwesome;
+  display: inline-block;
+  padding-left: 10px;
+  padding-right: 10px;
+  vertical-align: middle;
+  float: left;
+  content: "\f0c8";
+  color: lime;
+  padding: 1px 5px 0 0;
+}
+.doc-member .panel-heading .panel-title.override:before {
+  font-family: FontAwesome;
+  display: inline-block;
+  padding-left: 10px;
+  padding-right: 10px;
+  vertical-align: middle;
+  float: left;
+  content: "\f0c8";
+  color: red;
+  padding: 1px 5px 0 0;
 }
 .doc-member .panel-heading .badge {
   margin: 5px 1px;
