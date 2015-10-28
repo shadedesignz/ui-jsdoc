@@ -61,10 +61,30 @@ function needsSignature(doclet) {
     return needsSig;
 }
 
-function addSignatureParams(f) {
-    var params = helper.getSignatureParams(f, 'optional');
+function getSignatureParams(d) {
+    var pnames = [];
 
-    f.signature = (f.signature || '') + '(' + params.join(', ') + ')';
+    if (d.params) {
+        d.params.forEach(function(p) {
+            if (p.name && p.name.indexOf('.') === -1) {
+                if (p.optional) {
+                    pnames.push('<span class="optional">' + p.name + '</span>');
+                } else if (p.variable) {
+                    pnames.push('<span class="repeatable">' + p.name + '</span>');
+                } else {
+                    pnames.push(p.name);
+                }
+            }
+        });
+    }
+
+    return pnames;
+}
+
+function addSignatureParams(f) {
+    var params = getSignatureParams(f);
+
+    f.signature = (f.signature || '') + '( ' + params.join(', ') + ' )';
 }
 
 function addSignatureReturns(f) {
@@ -73,7 +93,11 @@ function addSignatureReturns(f) {
     f.signature = '<span class="signature">'+(f.signature || '') + '</span>';
 
     if (returnTypes.length) {
-        f.signature += '<span class="glyphicon glyphicon-circle-arrow-right"></span><span class="type-signature returnType">'+(returnTypes.length ? '{'+returnTypes.join('|')+'}' : '')+'</span>';
+        f.signature += '<i class="return-type-icon fa fa-arrow-circle-right"></i>' +
+            '<span class="type-signature returnType">' +
+            (returnTypes.length ?
+                '{<code>' + returnTypes.join('</code> or <code>') + '</code>}' :
+                '') + '</span>';
     }
 }
 
@@ -81,6 +105,18 @@ function addSignatureTypes(f) {
     var types = helper.getSignatureTypes(f);
 
     f.signature = (f.signature || '') + '<span class="type-signature">'+(types.length? ' :'+types.join('|') : '')+'</span>';
+}
+
+function isChainable(f) {
+    var chainable = false;
+
+    if (f.tags && f.tags.length) {
+        chainable = f.tags.some(function(tag) {
+            return tag.title === 'chainable';
+        });
+    }
+
+    return chainable;
 }
 
 function addAttribs(f) {
@@ -91,6 +127,11 @@ function addAttribs(f) {
             return '<span class="' + attr + ' badge">' +
                 htmlsafe(attr) + '</span>';
         }).join('');
+    }
+
+    if (isChainable(f)) {
+        f.attribs += '<span class="chainable badge">' +
+            htmlsafe('chainable') + '</span>';
     }
 }
 
@@ -440,9 +481,7 @@ exports.publish = function(taffyData, opts, tutorials) {
         if (doclet.kind === 'member') {
             addSignatureTypes(doclet);
             addAttribs(doclet);
-        }
-
-        if (doclet.kind === 'constant') {
+        } else if (doclet.kind === 'constant') {
             addSignatureTypes(doclet);
             addAttribs(doclet);
         }

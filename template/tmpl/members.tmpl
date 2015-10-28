@@ -70,38 +70,38 @@ if (data.type && data.type.names) {
             <?js= this.partial('examples.tmpl', examples) ?>
         <?js } ?>
     </div>
-<?js if (data.copyright || data.license || data.since) { ?>
-    <div class="panel-footer">
-        <div class="row">
-            <?js if (data.copyright) { ?>
-                <div class="col-sm-4">
-                    <span data-toggle="popover"
-                          title="Copyright"
-                          data-placement="right"
-                          data-content="<?js= data.copyright ?>"
-                          data-trigger="hover"
-                    >
-                    Copyright
-                    </span>
-                </div>
-            <?js } else { ?>
-                <div class="col-sm-4"></div>
-            <?js } ?>
+    <?js if (data.copyright || data.license || data.since) { ?>
+        <div class="panel-footer">
+            <div class="row">
+                <?js if (data.copyright) { ?>
+                    <div class="col-sm-4">
+                        <span data-toggle="popover"
+                              title="Copyright"
+                              data-placement="right"
+                              data-content="<?js= data.copyright ?>"
+                              data-trigger="hover"
+                        >
+                        Copyright
+                        </span>
+                    </div>
+                <?js } else { ?>
+                    <div class="col-sm-4"></div>
+                <?js } ?>
 
-            <?js if (data.license) { ?>
-                <div class="col-sm-4 text-center">
-                    <a href="<?js=  data.license ?>">License</a>
-                </div>
-            <?js } else { ?>
-                <div class="col-sm-4"></div>
-            <?js } ?>
+                <?js if (data.license) { ?>
+                    <div class="col-sm-4 text-center">
+                        <a href="<?js=  data.license ?>">License</a>
+                    </div>
+                <?js } else { ?>
+                    <div class="col-sm-4"></div>
+                <?js } ?>
 
-            <?js if (data.since) { ?>
-                <div class="col-sm-4 text-right">Since: <?js=  data.since ?></div>
-            <?js } else { ?>
-                <div class="col-sm-4"></div>
-            <?js } ?>
+                <?js if (data.since) { ?>
+                    <div class="col-sm-4 text-right">Since: <?js=  data.since ?></div>
+                <?js } else { ?>
+                    <div class="col-sm-4"></div>
+                <?js } ?>
+            </div>
         </div>
-    </div>
-<?js } ?>
+    <?js } ?>
 </div>

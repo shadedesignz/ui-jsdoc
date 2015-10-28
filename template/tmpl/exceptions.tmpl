@@ -1,30 +1,23 @@
 <?js
-    var data = obj;
+    var exceptions = obj;
+    var self = this;
 ?>
-<?js if (data.description && data.type && data.type.names) { ?>
-<dl>
-    <dt>
-        <div class="param-desc">
-        <?js= data.description ?>
-        </div>
-    </dt>
-    <dt>
-        <dl>
-            <dt>
-                Type
-            </dt>
-            <dd>
-                <?js= this.partial('type.tmpl', data.type.names) ?>
-            </dd>
-        </dl>
-    </dt>
-</dl>
-<?js } else { ?>
-    <div class="param-desc">
-    <?js if (data.description) { ?>
-        <?js= data.description ?>
-    <?js } else if (data.type && data.type.names) { ?>
-        <?js= this.partial('type.tmpl', data.type.names) ?>
-    <?js } ?>
-    </div>
-<?js } ?>
+
+<div class="exceptions">
+    <ul>
+    <?js exceptions.forEach(function(e) { ?>
+        <?js if (e.type && e.type.names.length) { ?>
+            <li>
+                <?js= self.partial('type.tmpl', e.type.names) ?>
+                <?js if (e.description) { ?>
+                    <ul class="list-unstyled">
+                        <li><?js= e.description ?></li>
+                    </ul>
+                <?js } ?>
+            </li>
+        <?js } else if (e.description) { ?>
+            <li><?js= e.description ?></li>
+        <?js } ?>
+    <?js }); ?>
+    </ul>
+</div>

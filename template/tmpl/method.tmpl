@@ -2,11 +2,10 @@
 var data = obj;
 var self = this;
 
-if (data.memberof === 'SimpleRenderer' && data.name === 'get') {
+if (data.memberof === 'SimpleRenderer' && data.name === '_changeRenderState') {
     console.log(data);
 }
 ?>
-
 
 <div class="doc-member panel panel-default">
     <div class="panel-heading" id="<?js= id ?>">
@@ -53,20 +52,50 @@ if (data.memberof === 'SimpleRenderer' && data.name === 'get') {
     </div>
     <div class="markdown-body panel-body">
         <?js= this.partial('description.tmpl', data) ?>
-        <?js= this.partial('types.tmpl', data.type) ?>
         <?js= this.partial('details.tmpl', data) ?>
-
-        <?js if (data['this']) { ?>
-            <b>Scope:</b> <?js= this.linkto(data['this'], data['this']) ?>
-        <?js } ?>
 
         <?js if (data.params && params.length) { ?>
             <h5><b>Parameters</b>:</h5>
             <?js= this.partial('params.tmpl', params) ?>
         <?js } ?>
 
-        <?js if (data.returns && returns.length) { ?>
-            <h5><b>Returns</b>:</h5>
+        <?js if (data['this']) { ?>
+            <b>Scope:</b> <?js= this.linkto(data['this'], data['this']) ?>
+        <?js } ?>
+
+        <?js if (data.fires && fires.length) { ?>
+            <h5><b>Fires</b>:</h5>
+            <ul><?js fires.forEach(function(f) { ?>
+                <li><?js= self.linkto(f, f.replace('event:', '')) ?></li>
+            <?js }); ?></ul>
+        <?js } ?>
+
+        <?js if (data.listens && listens.length) { ?>
+            <h5><b>Listens</b>:</h5>
+            <ul><?js listens.forEach(function(f) { ?>
+                <li><?js= self.linkto(f, f.replace('event:', '')) ?></li>
+            <?js }); ?></ul>
+        <?js } ?>
+
+        <?js if (data.listeners && listeners.length) { ?>
+            <h5><b>Listeners</b>:</h5>
+            <ul><?js listeners.forEach(function(f) { ?>
+                <li><?js= self.linkto(f, f.replace('event:', '')) ?></li>
+            <?js }); ?></ul>
+        <?js } ?>
+
+        <?js if (data.exceptions && exceptions.length) { ?>
+            <h5><b>Throws</b>:</h5>
+            <?js= self.partial('exceptions.tmpl', data.exceptions) ?>
+        <?js } ?>
+
+        <?js if (data.returns && returns.length) {
+            if (returns.length === 1) { ?>
+                <b>Returns</b>:
+            <?js } else { ?>
+                <h5><b>Returns</b>:</h5>
+            <?js } ?>
+
             <?js= self.partial('returns.tmpl', data.returns) ?>
         <?js } ?>
 
@@ -74,4 +103,38 @@ if (data.memberof === 'SimpleRenderer' && data.name === 'get') {
             <?js= this.partial('examples.tmpl', examples) ?>
         <?js } ?>
     </div>
+    <?js if (data.copyright || data.license || data.since) { ?>
+        <div class="panel-footer">
+            <div class="row">
+                <?js if (data.copyright) { ?>
+                    <div class="col-sm-4">
+                        <span data-toggle="popover"
+                              title="Copyright"
+                              data-placement="right"
+                              data-content="<?js= data.copyright ?>"
+                              data-trigger="hover"
+                        >
+                        Copyright
+                        </span>
+                    </div>
+                <?js } else { ?>
+                    <div class="col-sm-4"></div>
+                <?js } ?>
+
+                <?js if (data.license) { ?>
+                    <div class="col-sm-4 text-center">
+                        <a href="<?js=  data.license ?>">License</a>
+                    </div>
+                <?js } else { ?>
+                    <div class="col-sm-4"></div>
+                <?js } ?>
+
+                <?js if (data.since) { ?>
+                    <div class="col-sm-4 text-right">Since: <?js=  data.since ?></div>
+                <?js } else { ?>
+                    <div class="col-sm-4"></div>
+                <?js } ?>
+            </div>
+        </div>
+    <?js } ?>
 </div>

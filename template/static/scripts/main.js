@@ -24,7 +24,7 @@ $(function () {
             item.children.forEach(function(child) {
                 child.$.show();
             });
-        })
+        });
     };
 
     $('.nav-side-menu .menu-content > li a').click(function(e) {

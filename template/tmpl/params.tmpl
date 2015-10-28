@@ -32,9 +32,13 @@
         <?js if (param.optional) { ?>
             <span class="optional badge">optional</span>
         <?js } ?>
+        <?js if (param.variable) { ?>
+            <span class="repeatable badge">repeatable</span>
+        <?js } ?>
         <?js if (param.nullable) { ?>
             <span class="nullable badge">nullable</span>
         <?js } ?>
+
     </li>
     <ul class="list-unstyled">
         <?js if (param.type && param.type.names) { ?>

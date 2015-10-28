@@ -49,9 +49,7 @@ returns.forEach(function (ret, i) {
     if (ret.type) {
         hasType = true;
     }
-});
-console.log(returns);
-?>
+});?>
 
 <?js returns.forEach(function(ret) {
     if (!ret) { return false; }
@@ -62,18 +60,15 @@ console.log(returns);
                 <?js if (ret.name) { ?>
                     <code><?js= ret.name ?></code>
                 <?js } else { ?>
-
+                    Type: <?js= self.partial('type.tmpl', ret.type.names) ?>
                 <?js } ?>
 
-                <?js if (ret.optional) { ?>
-                    <span class="optional badge">optional</span>
-                <?js } ?>
                 <?js if (ret.nullable) { ?>
                     <span class="nullable badge">nullable</span>
                 <?js } ?>
             </li>
             <ul class="list-unstyled">
-                <?js if (ret.type && ret.type.names) { ?>
+                <?js if (ret.type && ret.type.names && ret.name) { ?>
                     <li>Type: <?js= self.partial('type.tmpl', ret.type.names) ?></li>
                 <?js } ?>
 
@@ -86,8 +81,8 @@ console.log(returns);
                 <?js } ?>
             </ul>
         </ul>
-    <?js } else { ?>
-        <ul class="returns list-unstyled">
+    <?js } else if (returns.length > 1) { ?>
+        <ul class="returns">
             <?js if (ret.type && ret.type.names) { ?>
                 <li>Type: <?js= self.partial('type.tmpl', ret.type.names) ?></li>
             <?js } ?>
@@ -100,5 +95,19 @@ console.log(returns);
                 <?js= self.partial('returns.tmpl', ret.subReturns) ?>
             <?js } ?>
         </ul>
+    <?js } else { ?>
+        <span class="returns">
+            <?js if (ret.type && ret.type.names) { ?>
+                <?js= self.partial('type.tmpl', ret.type.names) ?>
+            <?js } ?>
+
+            <?js if (ret.description) { ?>
+                <?js= ret.description ?>
+            <?js } ?>
+
+            <?js if (ret.nullable) { ?>
+                <span class="nullable badge">nullable</span>
+            <?js } ?>
+        </span>
     <?js } ?>
 <?js }); ?>
