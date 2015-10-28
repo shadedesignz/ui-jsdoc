@@ -9,13 +9,6 @@ body {
 blockquote {
   font-size: inherit;
 }
-table {
-  width: 100%;
-}
-table tr th,
-table tr td {
-  padding: 0 10px;
-}
 .nav-side-menu {
   font-family: verdana;
   font-size: 12px;
@@ -303,6 +296,9 @@ table tr td {
   border: 1px solid black;
   background-color: #E4F1F7;
 }
+.doc-member .return-type-icon {
+  margin: 0 5px;
+}
 .detail-content {
   margin: 10px 0;
 }
@@ -312,4 +308,15 @@ table tr td {
 .tag-todo .todo-item label {
   cursor: text;
   font-weight: normal;
+}
+ul.params li {
+  margin: 5px 0;
+}
+code a {
+  text-decoration: underline;
+  color: #c7254e;
+}
+code a:hover {
+  color: #c7254e;
+  text-decoration: none;
 }

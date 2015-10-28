@@ -45,7 +45,7 @@ function jsDocCmd(opts) {
 }
 
 gulp.task('less', function () {
-    return gulp.src('template/less/**/jaguar.less')
+    return gulp.src('template/less/**/ui.less')
         .pipe(less({
             paths: [ path.join(__dirname, 'less', 'includes') ]
         }))
@@ -74,7 +74,7 @@ gulp.task('serve', ['express', 'livereload'], function () {
 });
 
 gulp.task('copy-css', function () {
-    gulp.src('template/static/styles/jaguar.css')
+    gulp.src('template/static/styles/ui.css')
         .pipe(gulp.dest(config.jsDocDest + '/styles'));
 });
 
