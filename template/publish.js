@@ -133,6 +133,11 @@ function addAttribs(f) {
         f.attribs += '<span class="chainable badge">' +
             htmlsafe('chainable') + '</span>';
     }
+
+    if (f.deprecated) {
+        f.attribs += '<span class="deprecated badge">' +
+            htmlsafe('Deprecated' + (f.deprecated === true ? '' : ': ' + f.deprecated)) + '</span>';
+    }
 }
 
 function shortenPaths(files, commonPrefix) {

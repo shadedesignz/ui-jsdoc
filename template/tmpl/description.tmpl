@@ -2,16 +2,6 @@
 var data = obj;
 ?>
 
-<?js if (data.deprecated === true) { ?>
-    <div class="deprecated label-danger text-center" role="alert">
-        <strong>Deprecated</strong>
-    </div>
-<?js } else if (data.deprecated) { ?>
-    <div class="deprecated label-danger text-center" role="alert">
-        <strong>Deprecated</strong>: <?js= data.deprecated ?>
-    </div>
-<?js } ?>
-
 <?js if (data.summary && data.description) { ?>
     <p>
         <span><?js= data.summary ?></span>

@@ -25,13 +25,14 @@ $(function () {
                 child.$.show();
             });
         });
-    };
+    },
+    $clearSearch = $('.nav-side-menu .clearer');
 
     $('.nav-side-menu .menu-content > li a').click(function(e) {
         e.stopPropagation();
     });
 
-    $('.nav-side-menu .clearer').click(function(e) {
+    $clearSearch.click(function(e) {
         $('#search').val('');
         $(this).hide();
         showAllNav();
@@ -44,9 +45,8 @@ $(function () {
             tempMatch = [],
             tempHide = [];
 
-        clearTimeout(searchTimeOut);
-
         if (val.length) {
+            $clearSearch.show();
             // TODO
             // Write Fuzzy search logic here
         } else {

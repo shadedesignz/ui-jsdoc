@@ -18,7 +18,7 @@ if (data.type && data.type.names) {
     });
 }
 ?>
-<div class="doc-member panel panel-default">
+<div class="doc-member panel panel-default<?js= data.deprecated ? ' deprecated' : '' ?>">
     <div class="panel-heading" id="<?js= id ?>">
         <div class="row">
             <div class="panel-title col-sm-8<?js= getClass(data) ?>">

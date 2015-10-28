@@ -2,5 +2,14 @@
     var data = obj;
     var self = this;
 ?>
+<?js if (data.deprecated === true) { ?>
+    <div class="deprecated label-danger text-center" role="alert">
+        <strong>Deprecated</strong>
+    </div>
+<?js } else if (data.deprecated) { ?>
+    <div class="deprecated label-danger text-center" role="alert">
+        <strong>Deprecated</strong>: <?js= data.deprecated ?>
+    </div>
+<?js } ?>
 
 <?js= this.partial('description.tmpl', data) ?>
